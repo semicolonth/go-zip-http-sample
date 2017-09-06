@@ -29,7 +29,6 @@ func rootHandler(w http.ResponseWriter, r *http.Request) {
 
 	// Create a buffer to write our archive to.
 	buf := new(bytes.Buffer)
-	fmt.Println("buf.Len() right after initiation: ", buf.Len())
 	
 	// Create a new zip archive.
 	zipWriter := zip.NewWriter(buf)
@@ -71,9 +70,6 @@ func rootHandler(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 			log.Fatal(err)
 	}
-
-	fmt.Println("buf.Len() after zip.Writer.Close(): ", buf.Len())
-	fmt.Println("buf content: ", buf.String())
 
 	fmt.Fprintf(w, "%s", buf.String())
 }
