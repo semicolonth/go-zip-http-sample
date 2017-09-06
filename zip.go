@@ -1,5 +1,13 @@
 package main
 
+/*
+
+Inspired by code from
+* https://gist.github.com/superbrothers/0a8b6390c6315916aeb8
+* https://golang.org/pkg/archive/zip/#example_Writer
+
+*/
+
 import (
 	"fmt"
 	"archive/zip"
@@ -13,15 +21,12 @@ func main () {
 	http.ListenAndServe("localhost:4001", nil)
 }
 
-// From: https://gist.github.com/superbrothers/0a8b6390c6315916aeb8
 func rootHandler(w http.ResponseWriter, r *http.Request) {
 	var err error
 
 	w.Header().Set("Content-Type", "application/zip")
 	w.WriteHeader(http.StatusOK)
 
-	// Reference: https://golang.org/pkg/archive/zip/#example_Writer
-	
 	// Create a buffer to write our archive to.
 	buf := new(bytes.Buffer)
 	fmt.Println("buf.Len() right after initiation: ", buf.Len())
